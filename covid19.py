@@ -25,7 +25,11 @@ def main():
         current_time = dt.datetime.now().time()
         if current_time >= start_time and current_time <= end_time:
             print('script is operational')
-            india_data_latest = covid19.getLocationByCountryCode('IN')[0]['latest']
+            try:
+                india_data_latest = covid19.getLocationByCountryCode('IN')[0]['latest']
+            except Exception as e:
+                time.sleep(200)
+                india_data_latest = covid19.getLocationByCountryCode('IN')[0]['latest']
             print(india_data_latest)
             print(india_data_latest != india_data)
             if india_data_latest != india_data:
